@@ -15,10 +15,6 @@ Need a DB Configured with the following credentials ( The DB connection credenti
 * Database Name : shopex
 * Username : root
 * Password : pass@123
-* spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-* spring.jpa.show-sql= true
-* spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-* spring.jpa.properties.hibernate.event.merge.entity_copy_observer=allow
 
 ### Running the spring boot application
 
