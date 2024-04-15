@@ -4,12 +4,12 @@ import com.ecom.shoppingex.dto.request.catalog.CatalogProduct;
 import com.ecom.shoppingex.repository.ProductRepository;
 import com.ecom.shoppingex.util.EntityTranformers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class CatalogServiceImpl implements CatalogService{
 
     @Autowired

@@ -7,11 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table( name="product", indexes = {
-        @Index(columnList = "brand,category"),
-        @Index(columnList = "brand"),
-        @Index(columnList = "category")
-})
+@Table(name = "product", indexes = {@Index(columnList = "brand,category"), @Index(columnList = "brand"), @Index(columnList = "category")})
 public class Product {
 
     @Getter

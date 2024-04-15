@@ -13,8 +13,7 @@ public class ShopperData {
     private String shopperId;
 
     @Getter
-    @NotNull( message= "Shelf cannot be null.")
+    @NotNull(message = "Shelf cannot be null.")
     private List<ShopperProduct> shelf;
-
 
 }

@@ -16,10 +16,10 @@ public class Customer {
 
     @Getter
     @Id
-    @Column(name="id", nullable = false)
+    @Column(name = "id", nullable = false)
     private String customerId;
 
     @Getter
-    @OneToMany(mappedBy = "customer",orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<CustomerSelection> customerSelections;
 }

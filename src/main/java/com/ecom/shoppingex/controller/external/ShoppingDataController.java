@@ -31,14 +31,14 @@ public class ShoppingDataController {
         return ResponseEntity.ok(
                 shopperService.getShoppersData(
                         ShopperRequestSpec.builder()
-                        .shopperId(shopperId)
-                        .offset(offSet)
-                        .limit(limit)
-                        .sortingKey(sortingKey)
-                        .sortOrder(sortOrder)
-                        .brand(brand)
-                        .category(category)
-                        .build()
+                                .shopperId(shopperId)
+                                .offset(offSet)
+                                .limit(limit)
+                                .sortingKey(sortingKey)
+                                .sortOrder(sortOrder)
+                                .brand(brand)
+                                .category(category)
+                                .build()
                 ));
     }
 }

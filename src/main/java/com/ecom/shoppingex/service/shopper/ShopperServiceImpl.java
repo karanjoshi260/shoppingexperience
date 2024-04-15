@@ -8,26 +8,23 @@ import com.ecom.shoppingex.entity.shopper.Customer;
 import com.ecom.shoppingex.entity.shopper.CustomerSelection;
 import com.ecom.shoppingex.repository.CustomerRepository;
 import com.ecom.shoppingex.repository.CustomerSelectionRepository;
+import com.ecom.shoppingex.service.cache.CacheService;
 import com.ecom.shoppingex.specification.repository.ShopperSpecifications;
 import com.ecom.shoppingex.specification.request.ShopperRequestSpec;
 import com.ecom.shoppingex.util.DtoTransformer;
 import com.ecom.shoppingex.util.EntityTranformers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class ShopperServiceImpl implements ShopperService {
 
     @Autowired
@@ -37,27 +34,16 @@ public class ShopperServiceImpl implements ShopperService {
     private CustomerSelectionRepository customerSelectionRepository;
 
     @Autowired
-    private ShopperSpecifications shopperSpecifications;
+    private ShopperSpecifications shopperSpecs;
 
     @Autowired
-    private CacheManager cacheManager;
+    private CacheService cacheService;
 
     @Override
     public void updateShoppers(List<ShopperData> shoppersData) {
         List<Customer> customers = shoppersData.stream().map(EntityTranformers::buildCustomerEntity).collect(Collectors.toList());
-        shoppersData.stream().map(ShopperData::getShopperId).forEach(this::evictCache);
+        shoppersData.stream().map(ShopperData::getShopperId).forEach(cacheService::evictCache);
         customerRepository.saveAll(customers);
-    }
-
-    private <R> void evictCache(R collect) {
-    }
-
-    private void evictCache(String shopperId) {
-        Object cache = cacheManager.getCache("shoppers").getNativeCache();
-        if (cache instanceof ConcurrentMap<?, ?>) {
-            Set<Map.Entry<List<String>, Object>> cacheEntries = ((ConcurrentMap) cache).entrySet();
-            cacheEntries.removeIf(cacheEntry -> cacheEntry.getKey().get(0).startsWith(shopperId));
-        }
     }
 
     @Override
@@ -81,10 +67,10 @@ public class ShopperServiceImpl implements ShopperService {
     private Optional<Specification> buildCriteriaSpecification(ShopperRequestSpec requestSpec) {
         Specification<CustomerSelection> specification = Specification.where((root, query, builder) -> builder.equal(root.get("id").get("customerId"), requestSpec.getShopperId()));
         if (requestSpec.getCategory() != null) {
-            specification = specification.and(shopperSpecifications.categoryFilter(requestSpec.getCategory()));
+            specification = specification.and(shopperSpecs.categoryFilter(requestSpec.getCategory()));
         }
         if (requestSpec.getBrand() != null) {
-            specification = specification.and(shopperSpecifications.brandFilter(requestSpec.getBrand()));
+            specification = specification.and(shopperSpecs.brandFilter(requestSpec.getBrand()));
         }
         return Optional.ofNullable(specification);
     }

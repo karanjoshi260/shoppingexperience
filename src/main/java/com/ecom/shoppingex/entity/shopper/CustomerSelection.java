@@ -18,17 +18,17 @@ public class CustomerSelection {
 
     @Getter
     @MapsId("productId")
-    @JoinColumn(name="product_id", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     @ManyToOne
     private Product product;
 
     @Getter
     @MapsId("customerId")
-    @JoinColumn(name="customer_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     @ManyToOne
     private Customer customer;
 
     @Getter
-    @Column(name="relevancy_score", nullable = false)
+    @Column(name = "relevancy_score", nullable = false)
     private double relevancyScore;
 }
