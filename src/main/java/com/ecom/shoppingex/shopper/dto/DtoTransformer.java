@@ -1,6 +1,5 @@
-package com.ecom.shoppingex.shopper.util;
+package com.ecom.shoppingex.shopper.dto;
 
-import com.ecom.shoppingex.shopper.dto.response.ProductResponse;
 import com.ecom.shoppingex.shopper.entity.CustomerSelection;
 
 public interface DtoTransformer {

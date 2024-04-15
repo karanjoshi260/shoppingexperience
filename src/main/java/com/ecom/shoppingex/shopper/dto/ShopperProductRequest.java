@@ -1,9 +1,9 @@
-package com.ecom.shoppingex.shopper.dto.request;
+package com.ecom.shoppingex.shopper.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-public class ShopperProduct {
+public class ShopperProductRequest {
 
     @Getter
     @NotNull(message = "Product Id cannot be null.")

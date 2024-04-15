@@ -1,18 +1,13 @@
 package com.ecom.shoppingex.shopper.service;
 
-import com.ecom.shoppingex.shopper.dto.request.ShopperData;
-import com.ecom.shoppingex.shopper.dto.response.ProductResponse;
-import com.ecom.shoppingex.shopper.dto.response.ShopperDataResponse;
-import com.ecom.shoppingex.shopper.dto.request.ProductSortKey;
+import com.ecom.shoppingex.shopper.dto.*;
 import com.ecom.shoppingex.shopper.entity.Customer;
 import com.ecom.shoppingex.shopper.entity.CustomerSelection;
+import com.ecom.shoppingex.shopper.entity.EntityTranformers;
 import com.ecom.shoppingex.shopper.repository.CustomerRepository;
 import com.ecom.shoppingex.shopper.repository.CustomerSelectionRepository;
-import com.ecom.shoppingex.shopper.service.cache.CacheService;
 import com.ecom.shoppingex.shopper.repository.ShopperSpecifications;
-import com.ecom.shoppingex.shopper.dto.request.ShopperRequestSpec;
-import com.ecom.shoppingex.shopper.util.DtoTransformer;
-import com.ecom.shoppingex.shopper.util.EntityTranformers;
+import com.ecom.shoppingex.shopper.service.cache.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
@@ -40,9 +35,9 @@ public class ShopperServiceImpl implements ShopperService {
     private CacheService cacheService;
 
     @Override
-    public void updateShoppers(List<ShopperData> shoppersData) {
+    public void updateShoppers(List<ShopperDataRequest> shoppersData) {
         List<Customer> customers = shoppersData.stream().map(EntityTranformers::buildCustomerEntity).collect(Collectors.toList());
-        shoppersData.stream().map(ShopperData::getShopperId).forEach(cacheService::evictCache);
+        shoppersData.stream().map(ShopperDataRequest::getShopperId).forEach(cacheService::evictCache);
         customerRepository.saveAll(customers);
     }
 

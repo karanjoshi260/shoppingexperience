@@ -1,8 +1,8 @@
 package com.ecom.shoppingex.catalog.service;
 
-import com.ecom.shoppingex.catalog.dto.CatalogProduct;
+import com.ecom.shoppingex.catalog.dto.ProductInfoRequest;
 import com.ecom.shoppingex.catalog.repository.ProductRepository;
-import com.ecom.shoppingex.shopper.util.EntityTranformers;
+import com.ecom.shoppingex.shopper.entity.EntityTranformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class CatalogServiceImpl implements CatalogService{
 
 
     @Override
-    public void uploadProducts(List<CatalogProduct> products) {
+    public void uploadProducts(List<ProductInfoRequest> products) {
 
         productRepository.saveAll(products
                 .stream()

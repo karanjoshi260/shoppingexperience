@@ -1,4 +1,4 @@
-package com.ecom.shoppingex.shopper.dto.request;
+package com.ecom.shoppingex.shopper.dto;
 
 public enum ProductSortKey {
     BRAND,

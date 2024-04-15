@@ -1,4 +1,4 @@
-package com.ecom.shoppingex.shopper.dto.request;
+package com.ecom.shoppingex.shopper.dto;
 
 import lombok.Builder;
 import lombok.Getter;

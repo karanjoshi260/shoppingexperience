@@ -1,8 +1,8 @@
 package com.ecom.shoppingex.controller;
 
-import com.ecom.shoppingex.catalog.dto.CatalogProduct;
-import com.ecom.shoppingex.shopper.dto.request.ShopperData;
+import com.ecom.shoppingex.catalog.dto.ProductInfoRequest;
 import com.ecom.shoppingex.catalog.service.CatalogService;
+import com.ecom.shoppingex.shopper.dto.ShopperDataRequest;
 import com.ecom.shoppingex.shopper.service.ShopperService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class DataUploadController {
     private ShopperService shopperService;
 
     @PutMapping("/shoppers")
-    public ResponseEntity uploadShopper(@RequestBody @Valid List<ShopperData> shopperSelection) {
+    public ResponseEntity uploadShopper(@RequestBody @Valid List<ShopperDataRequest> shopperSelection) {
         shopperService.updateShoppers(shopperSelection);
         return ResponseEntity.created(URI.create("/shopper/")).build();
     }
 
     @PostMapping("/products")
-    public ResponseEntity addProducts(@RequestBody @Valid List<CatalogProduct> products) {
+    public ResponseEntity addProducts(@RequestBody @Valid List<ProductInfoRequest> products) {
         catalogService.uploadProducts(products);
         return ResponseEntity.created(URI.create("/products/")).build();
     }

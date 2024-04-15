@@ -1,8 +1,8 @@
-package com.ecom.shoppingex.shopper.util;
+package com.ecom.shoppingex.shopper.entity;
 
-import com.ecom.shoppingex.catalog.dto.CatalogProduct;
-import com.ecom.shoppingex.shopper.dto.request.ShopperData;
-import com.ecom.shoppingex.shopper.dto.request.ShopperProduct;
+import com.ecom.shoppingex.catalog.dto.ProductInfoRequest;
+import com.ecom.shoppingex.shopper.dto.ShopperDataRequest;
+import com.ecom.shoppingex.shopper.dto.ShopperProductRequest;
 import com.ecom.shoppingex.catalog.entity.Product;
 import com.ecom.shoppingex.shopper.entity.Customer;
 import com.ecom.shoppingex.shopper.entity.CustomerSelection;
@@ -11,7 +11,7 @@ import com.ecom.shoppingex.shopper.entity.CustomerSelectionPK;
 import java.util.stream.Collectors;
 
 public interface EntityTranformers {
-    static Product buildProductEntity(CatalogProduct rProduct) {
+    static Product buildProductEntity(ProductInfoRequest rProduct) {
         return Product.builder()
                 .productId(rProduct.getProductId())
                 .brand(rProduct.getBrand())
@@ -19,7 +19,7 @@ public interface EntityTranformers {
                 .build();
     }
 
-    static Customer buildCustomerEntity(ShopperData shopperData) {
+    static Customer buildCustomerEntity(ShopperDataRequest shopperData) {
         return Customer.builder().customerId(shopperData.getShopperId())
                 .customerSelections(
                         shopperData.getShelf()
@@ -30,7 +30,7 @@ public interface EntityTranformers {
                 .build();
     }
 
-    private static CustomerSelection getCustomerSelectionEntity(ShopperData shopperData, ShopperProduct sp) {
+    private static CustomerSelection getCustomerSelectionEntity(ShopperDataRequest shopperData, ShopperProductRequest sp) {
         return CustomerSelection.builder()
                 .id(CustomerSelectionPK.builder()
                         .customerId(shopperData.getShopperId())

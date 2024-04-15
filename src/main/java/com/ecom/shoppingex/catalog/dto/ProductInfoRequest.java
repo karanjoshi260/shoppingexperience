@@ -3,7 +3,7 @@ package com.ecom.shoppingex.catalog.dto;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-public class CatalogProduct {
+public class ProductInfoRequest {
 
     @Getter
     @NotNull

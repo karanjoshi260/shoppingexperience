@@ -1,8 +1,8 @@
 package com.ecom.shoppingex.controller;
 
-import com.ecom.shoppingex.shopper.dto.request.ProductSortKey;
+import com.ecom.shoppingex.shopper.dto.ProductSortKey;
+import com.ecom.shoppingex.shopper.dto.ShopperRequestSpec;
 import com.ecom.shoppingex.shopper.service.ShopperService;
-import com.ecom.shoppingex.shopper.dto.request.ShopperRequestSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
